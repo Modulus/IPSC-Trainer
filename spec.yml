@@ -13,16 +13,16 @@ host: "ipsc.skaugeconsult.net"
 basePath: "/v1"
 tags:
 - name: "drillDefinition"
-  description: "Everything about your Pets"
+  description: "Everything about your drill definitions"
   externalDocs:
     description: "Find out more"
     url: "http://swagger.io"
-- name: "store"
-  description: "Access to Petstore orders"
+- name: "DrillDetails"
+  description: "Access Drill definition"
 - name: "user"
   description: "Operations about user"
   externalDocs:
-    description: "Find out more about our store"
+    description: "Find out more about our drills"
     url: "http://swagger.io"
 schemes:
 - "https"
@@ -31,7 +31,7 @@ paths:
   /drill:
     post:
       tags:
-      - "drillDefinition"
+      - "drill"
       summary: "Add a new drill to the database"
       description: ""
       operationId: "addDrill"
@@ -47,20 +47,20 @@ paths:
         description: "Drill object that needs to be added to the store"
         required: true
         schema:
-          $ref: "#/definitions/DrillDefinition"
+          $ref: "#/definitions/Drill"
       responses:
         405:
           description: "Invalid input"
       security:
-      - petstore_auth:
-        - "write:drillDefinition"
-        - "read:drillDefinition"
+      - drill_auth:
+        - "write:drill"
+        - "read:drill"
     put:
       tags:
-      - "drillDefinition"
-      summary: "Update an existing pet"
+      - "drill"
+      summary: "Update an existing drill"
       description: ""
-      operationId: "updatePet"
+      operationId: "updateDrill"
       consumes:
       - "application/json"
       - "application/xml"
@@ -70,35 +70,240 @@ paths:
       parameters:
       - in: "body"
         name: "body"
-        description: "Pet object that needs to be added to the store"
+        description: "Drill object that needs to be added to the store"
         required: true
         schema:
-          $ref: "#/definitions/DrillDefinition"
+          $ref: "#/definitions/Drill"
       responses:
         400:
           description: "Invalid ID supplied"
         404:
-          description: "Pet not found"
+          description: "Drill not found"
         405:
           description: "Validation exception"
       security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
+      - drill_auth:
+        - "write:Drills"
+        - "read:Drills"
+    delete:
+      tags:
+      - "drill"
+      summary: "Delete an existing drill"
+      description: ""
+      operationId: "deleteDrill"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Drill object that needs to be deleted from the database"
+        required: true
+        schema:
+          $ref: "#/definitions/Drill"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Drill not found"
+        405:
+          description: "Validation exception"
+      security:
+      - drill_auth:
+        - "write:drill"
+        - "read:drill"  
+        - "delete:drill"      
+  /drill/details:
+    post:
+      tags:
+      - "drill"
+      summary: "Add a new drill to the database"
+      description: ""
+      operationId: "addDrillDetails"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "DrillDetials object that needs to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/DrillDetails"
+      responses:
+        405:
+          description: "Invalid input"
+      security:
+      - drill_auth:
+        - "write:drilldetails"
+        - "read:drilldetails"
+    put:
+      tags:
+      - "drilldetails"
+      summary: "Update an existing drill details"
+      description: ""
+      operationId: "updateDrillDetails"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Drill object that needs to be added to the store"
+        required: true
+        schema:
+          $ref: "#/definitions/DrillDetails"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Drill not found"
+        405:
+          description: "Validation exception"
+      security:
+      - drill_auth:
+        - "write:DrillDetails"
+        - "read:DrillDetails"
+    delete:
+      tags:
+      - "drilldetails"
+      summary: "Delete an existing drill details"
+      description: ""
+      operationId: "deleteDrillDetails"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Drill object that needs to be added to the store"
+        required: true
+        schema:
+          $ref: "#/definitions/DrillDetails"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Drill not found"
+        405:
+          description: "Validation exception"
+      security:
+      - drill_auth:
+        - "delete:DrillDetails"        
+  /training:
+    post:
+      tags:
+      - "training"
+      summary: "Add a new training to the database"
+      description: ""
+      operationId: "addTraining"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Training details to add"
+        required: true
+        schema:
+          $ref: "#/definitions/Training"
+      responses:
+        405:
+          description: "Invalid input"
+      security:
+      - drill_auth:
+        - "write:training"
+        - "read:training"
+    put:
+      tags:
+      - "training"
+      summary: "Update an existing training"
+      description: ""
+      operationId: "updateTraining"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Training object that needs to be added to the database"
+        required: true
+        schema:
+          $ref: "#/definitions/Training"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Training not found"
+        405:
+          description: "Validation exception"
+      security:
+      - drill_auth:
+        - "write:training"
+        - "read:training"      
+    delete:
+      tags:
+      - "training"
+      summary: "Delete an existing training"
+      description: ""
+      operationId: "deleteTraining"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Training object that needs to be added to the database"
+        required: true
+        schema:
+          $ref: "#/definitions/Training"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Training not found"
+        405:
+          description: "Validation exception"
+      security:
+      - drill_auth:
+        - "write:training"
+        - "read:training"      
+        - "delete:training"       
 securityDefinitions:
-  petstore_auth:
+  drill_auth:
     type: "oauth2"
-    authorizationUrl: "http://petstore.swagger.io/oauth/dialog"
+    authorizationUrl: "http://driller.swagger.io/oauth/dialog"
     flow: "implicit"
     scopes:
-      write:pets: "modify pets in your account"
-      read:pets: "read your pets"
+      write:drill: "modify drills in your account"
+      read:drill: "read your Drills"
   api_key:
     type: "apiKey"
     name: "api_key"
     in: "header"
 definitions:
-  DrillDefinition:
+  Training:
     type: "object"
     properties:
       id:
@@ -107,13 +312,13 @@ definitions:
       drillId:
         type: "integer"
         format: "int64"
-      drills:
+      drillsDetails:
         type: array
         items: 
            $ref: '#/components/schemas/DrillDetails'
-      drillTime:
+      drillDate:
         type: "string"
-        format: "date-time"
+       # format: "date-time"
       status:
         type: "string"
         description: "Order Status"
@@ -132,18 +337,35 @@ definitions:
       id:
         type: "integer"
         format: "int64"
-      name:
-        type: "string"
-      targets:
-        type: "integer"
-        format: "int64"
-        description: "Amount of targets for this drill"
+      drills:
+        type: array
+        items:
+          $ref: '#/components/schemas/Drill'
       splits:
         array:
           items:
             type: double
     xml:
       name: "DrillDetails"
+  Drill:
+    type: "object"
+    properties:
+      id: 
+        type: "integer"
+        format: "int64"
+      name: 
+        type: "string"
+      targetAmount: 
+        type: "integer"
+        format: "int64"
+      description:
+        type: "string"
+        desccription: "Description of the drill"
+      image:
+        type: "string"
+        descritption: "Path to image"  
+    xml:
+      name: "Drill"
 
   User:
     type: "object"
@@ -167,12 +389,16 @@ definitions:
         type: "integer"
         format: "int32"
         description: "User Status"
+      active:
+        type: "boolean"
+        default: false
     xml:
       name: "User"
   
   ApiResponse:
     type: "object"
     properties:
+    
       code:
         type: "integer"
         format: "int32"
@@ -183,15 +409,3 @@ definitions:
 externalDocs:
   description: "Find out more about Swagger"
   url: "http://swagger.io"
-# securityDefinitions:
-#   petstore_auth:
-#     type: "oauth2"
-#     authorizationUrl: "http://petstore.swagger.io/oauth/dialog"
-#     flow: "implicit"
-#     scopes:
-#       write:pets: "modify pets in your account"
-#       read:pets: "read your pets"
-#   api_key:
-#     type: "apiKey"
-#     name: "api_key"
-#     in: "header"
