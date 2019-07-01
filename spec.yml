@@ -32,7 +32,7 @@ paths:
     get:
       tags:
       - "drill"
-      summary: "Add a new drill to the database"
+      summary: "Get a drill from the database by id"
       description: ""
       operationId: "getDrillById"
       consumes:
@@ -58,9 +58,9 @@ paths:
           description: "Invalid ID supplied"
         404:
           description: "Drill not found"
-      security:
-      - drill_auth:
-        - "read:drill"  
+      # security:
+      # - drill_auth:
+      #   - "read:drill"  
   /drill:        
     get:
       tags:
@@ -85,9 +85,9 @@ paths:
           description: "Invalid ID supplied"
         404:
           description: "Drill not found"
-      security:
-      - drill_auth:
-        - "read:drill"  
+      # security:
+      # - drill_auth:
+      #   - "read:drill"  
     post:
       tags:
       - "drill"
@@ -110,10 +110,10 @@ paths:
       responses:
         405:
           description: "Invalid input"
-      security:
-      - drill_auth:
-        - "write:drill"
-        - "read:drill"
+      # security:
+      # - drill_auth:
+      #   - "write:drill"
+      #   - "read:drill"
     put:
       tags:
       - "drill"
@@ -140,10 +140,10 @@ paths:
           description: "Drill not found"
         405:
           description: "Validation exception"
-      security:
-      - drill_auth:
-        - "write:Drills"
-        - "read:Drills"
+      # security:
+      # - drill_auth:
+      #   - "write:Drills"
+      #   - "read:Drills"
     delete:
       tags:
       - "drill"
@@ -170,11 +170,11 @@ paths:
           description: "Drill not found"
         405:
           description: "Validation exception"
-      security:
-      - drill_auth:
-        - "write:drill"
-        - "read:drill"  
-        - "delete:drill"      
+      # security:
+      # - drill_auth:
+      #   - "write:drill"
+      #   - "read:drill"  
+      #   - "delete:drill"      
   /drill/details/{id}:
     get:
       tags:
@@ -202,13 +202,13 @@ paths:
             $ref: "#/definitions/DrillDetails"      
         405:
           description: "Invalid input"
-      security:
-      - drill_auth:
-        - "read:drilldetails"  
+      # security:
+      # - drill_auth:
+      #   - "read:drilldetails"  
   /drill/details:        
     post:
       tags:
-      - "drill"
+      - "drilldetails"
       summary: "Add a new drill to the database"
       description: ""
       operationId: "addDrillDetails"
@@ -228,10 +228,10 @@ paths:
       responses:
         405:
           description: "Invalid input"
-      security:
-      - drill_auth:
-        - "write:drilldetails"
-        - "read:drilldetails"
+      # security:
+      # - drill_auth:
+      #   - "write:drilldetails"
+      #   - "read:drilldetails"
     put:
       tags:
       - "drilldetails"
@@ -258,10 +258,10 @@ paths:
           description: "Drill not found"
         405:
           description: "Validation exception"
-      security:
-      - drill_auth:
-        - "write:DrillDetails"
-        - "read:DrillDetails"
+      # security:
+      # - drill_auth:
+      #   - "write:DrillDetails"
+      #   - "read:DrillDetails"
     delete:
       tags:
       - "drilldetails"
@@ -288,9 +288,9 @@ paths:
           description: "Drill not found"
         405:
           description: "Validation exception"
-      security:
-      - drill_auth:
-        - "delete:DrillDetails"        
+      # security:
+      # - drill_auth:
+      #   - "delete:DrillDetails"        
   /training:
     get:
       tags:
@@ -310,9 +310,9 @@ paths:
               $ref: "#/definitions/Training"
         400:
           description: "Invalid tag value"
-      security:
-      - drill_auth:
-        - "read:training"
+      # security:
+      # - drill_auth:
+      #   - "read:training"
     post:
       tags:
       - "training"
@@ -335,10 +335,10 @@ paths:
       responses:
         405:
           description: "Invalid input"
-      security:
-      - drill_auth:
-        - "write:training"
-        - "read:training"
+      # security:
+      # - drill_auth:
+      #   - "write:training"
+      #   - "read:training"
     put:
       tags:
       - "training"
@@ -365,10 +365,10 @@ paths:
           description: "Training not found"
         405:
           description: "Validation exception"
-      security:
-      - drill_auth:
-        - "write:training"
-        - "read:training"      
+      # security:
+      # - drill_auth:
+      #   - "write:training"
+      #   - "read:training"      
     delete:
       tags:
       - "training"
@@ -395,11 +395,11 @@ paths:
           description: "Training not found"
         405:
           description: "Validation exception"
-      security:
-      - drill_auth:
-        - "write:training"
-        - "read:training"      
-        - "delete:training" 
+      # security:
+      # - drill_auth:
+      #   - "write:training"
+      #   - "read:training"      
+      #   - "delete:training" 
   /training/{id}:   
     get:
       tags:
@@ -426,28 +426,25 @@ paths:
           description: "Invalid ID supplied"
         404:
           description: "Training not found"
-      security:
-      - api_key: []           
-securityDefinitions:
-  drill_auth:
-    type: "oauth2"
-    authorizationUrl: "http://driller.swagger.io/oauth/dialog"
-    flow: "implicit"
-    scopes:
-      write:drill: "modify drills in your account"
-      read:drill: "read your Drills"
-  api_key:
-    type: "apiKey"
-    name: "api_key"
-    in: "header"
+      # security:
+      # - api_key: []           
+# securityDefinitions:
+#   drill_auth:
+#     type: "oauth2"
+#     authorizationUrl: "http://driller.swagger.io/oauth/dialog"
+#     flow: "implicit"
+#     scopes:
+#       write:drill: "modify drills in your account"
+#       read:drill: "read your Drills"
+#   api_key:
+#     type: "apiKey"
+#     name: "api_key"
+#     in: "header"
 definitions:
   Training:
     type: "object"
     properties:
       id:
-        type: "integer"
-        format: "int64"
-      drillId:
         type: "integer"
         format: "int64"
       drillsDetails:
@@ -457,18 +454,8 @@ definitions:
       drillDate:
         type: "string"
        # format: "date-time"
-      status:
-        type: "string"
-        description: "Order Status"
-        enum:
-        - "placed"
-        - "approved"
-        - "delivered"
-      complete:
-        type: "boolean"
-        default: false
     xml:
-      name: "Order"
+      name: "Traning"
   DrillDetails:
     type: "object"
     properties:
