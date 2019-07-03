@@ -1,4 +1,7 @@
 openapi: 3.0.0
+servers:
+  - url: 'http://localhost:8080/v2'
+    description: Local development server
 info:
   description: "IPSC training app for storing exercises, splits and descriptions of exercises with images"
   version: "1.0.0"
@@ -415,7 +418,7 @@ components:
             $ref: '#/components/schemas/DrillDetails'
         drillDate:
           type: "string"
-        # format: "date-time"
+          #format: "date-time"
       xml:
         name: "Traning"
     DrillDetails:
@@ -434,7 +437,8 @@ components:
         splits:
           type: array
           items:
-            type: double
+            type: number
+            format: double
       xml:
         name: "DrillDetails"
     Drill:
