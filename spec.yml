@@ -392,19 +392,52 @@ paths:
       #   - "write:training"
       #   - "read:training"      
       #   - "delete:training" 
-# securityDefinitions:
-#   drill_auth:
-#     type: "oauth2"
-#     authorizationUrl: "http://driller.swagger.io/oauth/dialog"
-#     flow: "implicit"
-#     scopes:
-#       write:drill: "modify drills in your account"
-#       read:drill: "read your Drills"
-#   api_key:
-#     type: "apiKey"
-#     name: "api_key"
-#     in: "header"
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    drill_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: 'http://petstore.swagger.io/oauth/dialog'
+          scopes:
+            'write:drill': modify drills in your account
+            'read:drill': read your drill
+            "admin:drill": "admin access to drills in your account"
+      training_auth:    
+        type: oauth2
+        flows:
+          implicit:
+            authorizationUrl: 'http://petstore.swagger.io/oauth/dialog'
+            scopes:
+              "write:training": "Create drills in your account"
+              "read:training": "Read training in your account"     
+              "admin:training": "Admin access to traning in your account"        
+      drill_detail_auth:    
+        type: oauth2
+        flows:
+          implicit:
+            authorizationUrl: 'http://petstore.swagger.io/oauth/dialog'
+            scopes:
+              "write:drilldetail": "Create drilldetails in your account"
+              "read:drilldetail":  "Read drilldetails in your account"    
+              "admin:drilldetail":   "Admin access to drilldetails in your account"              
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header
+  links: {}
+  callbacks: {}
+# Apply security globally
+
+security: 
+  - bearerAuth: []
 components:
+  responses:
+    UnauthorizedError:
+      description: Access token is missing or invalid
   schemas:
     Training:
       type: "object"
@@ -504,3 +537,4 @@ components:
 externalDocs:
   description: "Find out more about Swagger"
   url: "http://swagger.io"
+
