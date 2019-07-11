@@ -636,10 +636,6 @@ components:
           format: "password"
         phone:
           type: "string"
-        userStatus:
-          type: "integer"
-          format: "int32"
-          description: "User Status"
         active:
           type: "boolean"
           default: false
